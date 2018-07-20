@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="solr Linux安装过程 第一步 进入 cd  /usr/local/ 目录下 创建solr 目录1mkdir solr 第二步 在该目录下准备所需的三个压缩包并解压,注意其中有一个压缩包是以.zip结尾的,需要在linux中下载该指令12yum -y install unzipunzip IKAnalyzer2012FF_hf1.zip -d ./  第三步 将solr 中的war包 部署到">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://yoursite.com/2018/07/20/solr Linux/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="solr Linux安装过程 第一步 进入 cd  /usr/local/ 目录下 创建solr 目录1mkdir solr 第二步 在该目录下准备所需的三个压缩包并解压,注意其中有一个压缩包是以.zip结尾的,需要在linux中下载该指令12yum -y install unzipunzip IKAnalyzer2012FF_hf1.zip -d ./  第三步 将solr 中的war包 部署到">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="c:/Users/ADMINI~1/AppData/Local/Temp/1531642165781.png">
+<meta property="og:image" content="c:/Users/ADMINI~1/AppData/Local/Temp/1531653065347.png">
+<meta property="og:updated_time" content="2018-07-15T11:16:41.945Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hexo">
+<meta name="twitter:description" content="solr Linux安装过程 第一步 进入 cd  /usr/local/ 目录下 创建solr 目录1mkdir solr 第二步 在该目录下准备所需的三个压缩包并解压,注意其中有一个压缩包是以.zip结尾的,需要在linux中下载该指令12yum -y install unzipunzip IKAnalyzer2012FF_hf1.zip -d ./  第三步 将solr 中的war包 部署到">
+<meta name="twitter:image" content="c:/Users/ADMINI~1/AppData/Local/Temp/1531642165781.png">
+  
+    <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/favicon.png">
+  
+  
+      <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+      <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  
+  <!-- 加载特效 -->
+    <script src="/js/pace.js"></script>
+    <link href="/css/pace/pace-theme-flash.css" rel="stylesheet" />
+  <script>
+      var yiliaConfig = {
+          rootUrl: '/',
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false
+      }
+  </script>
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            
+            <img lazy-src="/img/head.jpg" class="js-avatar">
+            
+        </a>
+
+        <hgroup>
+          <h1 class="header-author"><a href="/" title="Hi Mate">Fan Wenyan</a></h1>
+        </hgroup>
+
+        
+        
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/Home">博客首页</a></li>
+                        
+                            <li><a href="/works">作品展示</a></li>
+                        
+                            <li><a href="/about">留言打卡</a></li>
+                        
+                            <li><a href="/FrontEndGuide">前端导航</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fl mail" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=PAkNDgsKBQ4MCnxNTRJfU1E" title="mail">mail</a>
+                            
+                                <a class="fl github" target="_blank" href="https://github.com/Tenderness1" title="github">github</a>
+                            
+                                <a class="fl zhihu" target="_blank" href="#" title="zhihu">zhihu</a>
+                            
+                                <a class="fl weibo" target="_blank" href="#" title="weibo">weibo</a>
+                            
+                                <a class="fl google" target="_blank" href="#" title="google">google</a>
+                            
+                                <a class="fl twitter" target="_blank" href="#" title="twitter">twitter</a>
+                            
+                                <a class="fl linkedin" target="_blank" href="#" title="linkedin">linkedin</a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="https://github.com/Tenderness1">name</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">纯海迷、爱运动、爱交友、爱旅行、喜欢接触新鲜事物、迎接新的挑战，更爱游离于错综复杂的编码与逻辑中</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="Me">Fan Wenyan</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                
+                    <img lazy-src="/img/head.jpg" class="js-avatar">
+                
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="Me">Fan Wenyan</a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/Home">博客首页</a></li>
+                
+                    <li><a href="/works">作品展示</a></li>
+                
+                    <li><a href="/about">留言打卡</a></li>
+                
+                    <li><a href="/FrontEndGuide">前端导航</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a class="mail" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=PAkNDgsKBQ4MCnxNTRJfU1E" title="mail">mail</a>
+                    
+                        <a class="github" target="_blank" href="https://github.com/Tenderness1" title="github">github</a>
+                    
+                        <a class="zhihu" target="_blank" href="#" title="zhihu">zhihu</a>
+                    
+                        <a class="weibo" target="_blank" href="#" title="weibo">weibo</a>
+                    
+                        <a class="google" target="_blank" href="#" title="google">google</a>
+                    
+                        <a class="twitter" target="_blank" href="#" title="twitter">twitter</a>
+                    
+                        <a class="linkedin" target="_blank" href="#" title="linkedin">linkedin</a>
+                    
+                </div>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-solr Linux" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/07/20/solr Linux/" class="article-date">
+      <time datetime="2018-07-20T09:05:47.232Z" itemprop="datePublished">2018-07-20</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h3 id="solr-Linux安装过程"><a href="#solr-Linux安装过程" class="headerlink" title="solr Linux安装过程"></a>solr Linux安装过程</h3><hr>
+<h5 id="第一步-进入-cd-usr-local-目录下-创建solr-目录"><a href="#第一步-进入-cd-usr-local-目录下-创建solr-目录" class="headerlink" title="第一步 进入 cd  /usr/local/ 目录下 创建solr 目录"></a>第一步 进入 cd  /usr/local/ 目录下 创建solr 目录</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir solr</span><br></pre></td></tr></table></figure>
+<h5 id="第二步-在该目录下准备所需的三个压缩包并解压-注意其中有一个压缩包是以-zip结尾的-需要在linux中下载该指令"><a href="#第二步-在该目录下准备所需的三个压缩包并解压-注意其中有一个压缩包是以-zip结尾的-需要在linux中下载该指令" class="headerlink" title="第二步 在该目录下准备所需的三个压缩包并解压,注意其中有一个压缩包是以.zip结尾的,需要在linux中下载该指令"></a>第二步 在该目录下准备所需的三个压缩包并解压,注意其中有一个压缩包是以.zip结尾的,需要在linux中下载该指令</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum -y install unzip</span><br><span class="line">unzip IKAnalyzer2012FF_hf1.zip -d ./</span><br></pre></td></tr></table></figure>
+<p><img src="C:\Users\ADMINI~1\AppData\Local\Temp\1531642165781.png" alt=""></p>
+<h5 id="第三步-将solr-中的war包-部署到tomcat中-并再次打开一个窗口看tomcat的日志"><a href="#第三步-将solr-中的war包-部署到tomcat中-并再次打开一个窗口看tomcat的日志" class="headerlink" title="第三步 将solr 中的war包 部署到tomcat中,并再次打开一个窗口看tomcat的日志"></a>第三步 将solr 中的war包 部署到tomcat中,并再次打开一个窗口看tomcat的日志</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cp solr-4.10.3/example/webapps/solr.war  tomcat/webapps/</span><br><span class="line">/*看日志命令*/</span><br><span class="line"> tail -f /usr/local/solr/tomcat/logs/catalina.out</span><br></pre></td></tr></table></figure>
+<h5 id="第五步-进入tomcat-webapps中将拷入的war删除-以免重新编译-在解压后的文件中-添加-solr需要-jar包到指定文件夹"><a href="#第五步-进入tomcat-webapps中将拷入的war删除-以免重新编译-在解压后的文件中-添加-solr需要-jar包到指定文件夹" class="headerlink" title="第五步 进入tomcat  webapps中将拷入的war删除,以免重新编译,在解压后的文件中 添加 solr需要 jar包到指定文件夹"></a>第五步 进入tomcat  webapps中将拷入的war删除,以免重新编译,在解压后的文件中 添加 solr需要 jar包到指定文件夹</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cp /usr/local/solr/solr-4.10.3/example/lib/ext/* </span><br><span class="line">solr/WEB-INF/lib/</span><br></pre></td></tr></table></figure>
+<h5 id="第六步-将-usr-local-solr-solr-4-10-3-example中的solr文件夹复制出来命名为solrhome"><a href="#第六步-将-usr-local-solr-solr-4-10-3-example中的solr文件夹复制出来命名为solrhome" class="headerlink" title="第六步 将/usr/local/solr/solr-4.10.3/example中的solr文件夹复制出来命名为solrhome"></a>第六步 将/usr/local/solr/solr-4.10.3/example中的solr文件夹复制出来命名为solrhome</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp -r solr-4.10.3/example/solr /usr/local/solr</span><br></pre></td></tr></table></figure>
+<h5 id="第七步-修改vim-tomcat-webapps-solr-WEB-INF-web-xml"><a href="#第七步-修改vim-tomcat-webapps-solr-WEB-INF-web-xml" class="headerlink" title="第七步 修改vim tomcat/webapps/solr/WEB-INF/web.xml"></a>第七步 修改vim tomcat/webapps/solr/WEB-INF/web.xml<img src="C:\Users\ADMINI~1\AppData\Local\Temp\1531653065347.png" alt="下的配置文件"></h5><p>最后访问<a href="http://192.168.200.128:8080/solr/" target="_blank" rel="noopener">http://192.168.200.128:8080/solr/</a> 看是否能访问成功</p>
+
+      
+      
+        <div class="page-reward">
+          <p><a href="javascript:void(0)" onclick="dashangToggle()" class="dashang">赏</a></p>
+          <div class="hide_box"></div>
+          <div class="shang_box">
+            <a class="shang_close" href="javascript:void(0)" onclick="dashangToggle()">×</a>
+            <div class="shang_tit">
+              <p>纯属好玩</p>
+            </div>
+            <div class="shang_payimg">
+              <img src="/img/alipayimg.jpg" alt="扫码支持" title="扫一扫" />
+            </div>
+              <div class="pay_explain">扫码打赏，你说多少就多少</div>
+            <div class="shang_payselect">
+              
+                <div class="pay_item checked" data-id="alipay">
+                  <span class="radiobox"></span>
+                  <span class="pay_logo"><img src="/img/alipay.png" alt="支付宝" /></span>
+                </div>
+              
+              
+                <div class="pay_item" data-id="wechat">
+                  <span class="radiobox"></span>
+                  <span class="pay_logo"><img src="/img/weixin.png" alt="微信" /></span>
+                </div>
+              
+            </div>
+            <div class="shang_info">
+              <p>打开<span id="shang_pay_txt">支付宝</span>扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+        </div>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js"></script>
+        <script type="text/javascript">
+          $(".pay_item").click(function(){
+            $(this).addClass('checked').siblings('.pay_item').removeClass('checked');
+            var dataid=$(this).attr('data-id');
+            $(".shang_payimg img").attr("src","/img/"+dataid+"img.jpg");
+            $("#shang_pay_txt").text(dataid=="alipay"?"支付宝":"微信");
+          });
+          function dashangToggle(){
+            
+            $(".hide_box").fadeToggle();
+            $(".shang_box").fadeToggle();
+          }
+        </script>
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2018/07/20/solr Linux/"></a></p>
+        <p><span>文章作者:</span><a href="/" title="访问 Fan Wenyan 的个人博客">Fan Wenyan</a></p>
+        <p><span>发布时间:</span>2018年07月20日 - 17时05分</p>
+        <p><span>最后更新:</span>2018年07月15日 - 19时16分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2018/07/20/solr Linux/" title="">http://yoursite.com/2018/07/20/solr Linux/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2018/07/20/solr Linux/　　作者: Fan Wenyan" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script src="/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+<nav id="article-nav">
+  
+    <a href="/2018/07/20/solor中手动删除所有数据/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/07/20/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Hello World</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#solr-Linux安装过程"><span class="toc-number">1.</span> <span class="toc-text">solr Linux安装过程</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#第一步-进入-cd-usr-local-目录下-创建solr-目录"><span class="toc-number">1.0.1.</span> <span class="toc-text">第一步 进入 cd  /usr/local/ 目录下 创建solr 目录</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#第二步-在该目录下准备所需的三个压缩包并解压-注意其中有一个压缩包是以-zip结尾的-需要在linux中下载该指令"><span class="toc-number">1.0.2.</span> <span class="toc-text">第二步 在该目录下准备所需的三个压缩包并解压,注意其中有一个压缩包是以.zip结尾的,需要在linux中下载该指令</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#第三步-将solr-中的war包-部署到tomcat中-并再次打开一个窗口看tomcat的日志"><span class="toc-number">1.0.3.</span> <span class="toc-text">第三步 将solr 中的war包 部署到tomcat中,并再次打开一个窗口看tomcat的日志</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#第五步-进入tomcat-webapps中将拷入的war删除-以免重新编译-在解压后的文件中-添加-solr需要-jar包到指定文件夹"><span class="toc-number">1.0.4.</span> <span class="toc-text">第五步 进入tomcat  webapps中将拷入的war删除,以免重新编译,在解压后的文件中 添加 solr需要 jar包到指定文件夹</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#第六步-将-usr-local-solr-solr-4-10-3-example中的solr文件夹复制出来命名为solrhome"><span class="toc-number">1.0.5.</span> <span class="toc-text">第六步 将/usr/local/solr/solr-4.10.3/example中的solr文件夹复制出来命名为solrhome</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#第七步-修改vim-tomcat-webapps-solr-WEB-INF-web-xml"><span class="toc-number">1.0.6.</span> <span class="toc-text">第七步 修改vim tomcat/webapps/solr/WEB-INF/web.xml</span></a></li></ol></li></ol></li></ol>
+</div>
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+        }
+    })
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+    }
+</script>
+
+
+
+
+
+<div class="bdsharebuttonbox">
+	<a href="#" class="fx fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+	<a href="#" class="fx fa-weixin bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+	<a href="#" class="fx fa-qq bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+	<a href="#" class="fx fa-facebook-official bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+	<a href="#" class="fx fa-twitter bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+	<a href="#" class="fx fa-linkedin bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
+	<a href="#" class="fx fa-files-o bds_copy" data-cmd="copy" title="分享到复制网址"></a>
+</div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+
+
+    
+        <div id="gitments"></div>
+<script src="/js/gitment.browser.js"></script>
+<script>
+    var gitment = new Gitment({
+      id: window.location.pathname,
+      owner: 'fanwenyan',
+      repo: 'Tenderness1.github.io',
+      oauth: {
+        client_id: '',
+        client_secret: '',
+      },
+    })
+    gitment.render('gitments')
+</script>
+    
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2018/07/20/solor中手动删除所有数据/" title="上一篇: ">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+        
+            <a href="/2018/07/20/hello-world/" title="下一篇: Hello World">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2018/07/20/solor中手动删除所有数据/">solor中手动删除所有数据</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/07/20/solr Linux/">solr Linux</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/07/20/hello-world/">Hello World</a></li></ul>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+    <script>
+        $(".post-list").addClass("toc-article");
+        $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+            }
+        })
+    </script>
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2018 Fan Wenyan
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/luuman/hexo-theme-spfk" target="_blank">spfk</a> by luuman
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" >到访数: 
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">本页阅读量: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+
+    </div>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var backgroundnum = 24;
+            var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+            $("#mobile-nav").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+            $(".left-col").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <script language="javascript">
+    $(function() {
+        $("a[title]").each(function() {
+            var a = $(this);
+            var title = a.attr('title');
+            if (title == undefined || title == "") return;
+            a.data('title', title).removeAttr('title').hover(
+
+            function() {
+                var offset = a.offset();
+                $("<div id=\"anchortitlecontainer\"></div>").appendTo($("body")).html(title).css({
+                    top: offset.top - a.outerHeight() - 15,
+                    left: offset.left + a.outerWidth()/2 + 1
+                }).fadeIn(function() {
+                    var pop = $(this);
+                    setTimeout(function() {
+                        pop.remove();
+                    }, pop.text().length * 800);
+                });
+            }, function() {
+                $("#anchortitlecontainer").remove();
+            });
+        });
+    });
+</script>
+
+
+  </div>
+</body>
+</html>
