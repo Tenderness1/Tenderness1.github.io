@@ -230,6 +230,71 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-Dubbo" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/07/22/Dubbo/" class="article-date">
+      <time datetime="2018-07-22T12:09:28.631Z" itemprop="datePublished">2018-07-22</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="Dubbo"><a href="#Dubbo" class="headerlink" title="Dubbo"></a>Dubbo</h2><p>​     Dubbo是阿里开源的远程服务调用<strong>RPC</strong>的分布式框架,提供了<strong>SOA</strong>服务治理方案.它的架构主要有五个角色/核心组件,分为是Container(容器)、Provider(服务的提供方)、Registry(注册中心)、Consumer(服务的消费方)、Monitor(监控中心).</p>
+<p>​    容器主要负责启动,加载.运行服务提供者;同时服务提供者在启动时,向注册中心注册自己提供的服务;消费者向注册中心订阅自己的服务;注册中心返回服务提供者列表给消费者,如果有变更,注册中心将基于长连接推送变更数据给消费者;对于服务消费者,从提供者地址列表中,基于软负载均衡算法,选一台提供者进行调用,如果调用失败,在选择一台调用;服务消费者和提供者,在内存中累计调用次数和调用时间,定时每分钟发送一次统计数据到监控中心.</p>
+<p>[^RPC]: RPC（Remote Procedure Call Protocol），通俗的说，就是两台服务器A、B，应用A部署在A服务器上，应用B部署在B服务器上，A应用想要调用B服务器上B应用提供的函数（方法），由于不在一个内存空间，不能直接调用，需要通过网络通讯、协议、寻址的方式来表达调用的语义和传达调用的数据。RPC的亮点就是将远程调用的细节隐藏起来，使得调用远程服务像调用本地服务一样简单.<br>[^SOA]: SOA（Service-Oriented Architecture）:面向服务的架构，也可以理解为资源调度和治理中心。所谓服务，拿项目二举个最简单的例子，把商品、订单、搜索等核心业务抽取出来，作为独立的服务。和面向对象来比较，面向对象的程序是由一个一个的类组成的，而面向服务的架构是由一个一个服务组成的。如果有多个系统、多个终端（PC、APP等）都想调用我这个服务，那么就可以通过同一套协议和接口规范来调用。而服务越来越多，容量和资源利用率不相同的时候，我们可以增加一个调度中心基于访问的压力实时的管理集群容量，从而提高集群利用率，因此Dubbo就可以这中间起到的资源（服务）调度和治理中心。<br>[^负载均衡策略]: 【扩展】：Dubbo提供的负载均衡策略有四种：</p>
+<p> 1、随机均衡算法：按权重设置随机概率，默认的</p>
+<p>2、权重轮询均衡算法：按照公约后的权重设置轮询比率，能考虑到每台服务器的性能，所以，在实际应用中比较常见；</p>
+<p>3、最少活跃调用数均衡算法</p>
+<p>4、一致性hash均衡算法：相同参数的请求总是发到同一台提供者</p>
+<p>这个可以自己了解，考查的概率不大</p>
+<h5 id="注册中心"><a href="#注册中心" class="headerlink" title="注册中心"></a>注册中心</h5><p>1.注册中心只负责地址的注册和查找,相当于我们的目录服务,只有在容器启动时,服务提供者和调用者与注册中心交互,整个过程,注册中心不参与数据传输,不转发请求,压力较小(“两不一小”);</p>
+<p>2.注册中心宕机问题:</p>
+<p>注册中心会部署集群,如果集群中的任意一台宕机,将自动切换到另外一台,不会影响已运行的提供者和消费者;如果集群中的所有注册中心全部宕机之后,服务提供者和服务消费者扔能通过本地缓存通讯;数据库宕机后.注册中心仍能通过缓存提供服务列表查询,但不能注册新服务;</p>
+<h5 id="监控中心"><a href="#监控中心" class="headerlink" title="监控中心"></a>监控中心</h5><p>1.监控中心负责统计各服务调用次数.调用时间等,统计先在内存汇总后每分钟一次发送到监控中心服务器,并以报表展示</p>
+<p>2.监控中心宕机不影响使用,只是丢失部分的采样数据;</p>
+<p>3.dubbo-admin 可以通过监控中心的可视化界面,进行禁止服务和截止消费者(大量恶意访问的ip);</p>
+<h5 id="服务提供者"><a href="#服务提供者" class="headerlink" title="服务提供者"></a>服务提供者</h5><p>1.服务提供者出现宕机,如果任意一台宕机,由于服务提供者没有状态,不影响使用;如果所有的服务提供者全部宕机之后,服务消费者应用将无法使用,并无限次重连等待服务提供者恢复;</p>
+<p>2.服务提供者出现变更,比如增加新的机器部署,注册中心基于长连接将推送服务提供者信息给消费者;</p>
+<h4 id="Dubbo支持的协议"><a href="#Dubbo支持的协议" class="headerlink" title="Dubbo支持的协议"></a>Dubbo支持的协议</h4><p>​    Dubbo支持Dubbo协议,RMI协议,hessian协议,Http协议等</p>
+<p>Dubbo协议:缺省(默认)协议,采用了单一长连接和NIO异步通讯,使用线程池并发处理请求能减少握手和加大并发效率,采用的是Hession二进制序列化,性能较好,推荐使用.主要应用于传入传出参数数据小(建议小于100K),消费者比提供者个数多,由于是单一连接,因为尽量不要传输大文件.</p>
+<p>​    RMI协议:采用JDK标准的RMI协议(基于TCP协议),堵塞式短连接,JDK标准序列化方式,同步通讯.适用于消费者和提供者个数查不到的,可传文件.测试发现偶尔会连接失败,需要重建Stub.</p>
+<p>Hessian协议:采用http通讯,采用Servlet暴露服务,多连接短连接的同步传输方式,采用hession的二进制序列化,适合提供者比消费者多.</p>
+<h4 id="使用Duubo中常见问题"><a href="#使用Duubo中常见问题" class="headerlink" title="使用Duubo中常见问题"></a>使用Duubo中常见问题</h4><p>（1）序列化和反序列化异常：<br>调用服务，出现消息发送失败的时候，通常是接口方法的传入传出参数是新增加的扩展类，没有实现序列化接口；<br>     B服务远程调用A服务，返回值为C对象，结果断点A服务返回值对象C有值，但是B服务远程拿到的C对象为null；<br>（2）服务调用问题<br>     服务提供者是否正常运行？（这块可能涉及到调用的服务被禁止 ）<br>     连接的注册中心是否正确？（有时会涉及到注册中心的分组问题 ）<br>     相应的服务提供者是否注册到注册中心？<br>（3）调用版本问题（在开发过程中增加提供服务版本号和消费服务版本号）<br>     当遇到多个环境（开发、测试、上线）、多个版本（app、PC端）的时候，一个服务可能不满足我们的需求，因为对服务的版本号进行定义，可以为我们后期版本的迭代升级做好铺垫。<br>    整个过程会遇到各种各样的问题，上面这些基本都是技术问题 </p>
+<p>​    </p>
+
+      
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-SpringSecurity安全框架" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -380,69 +445,6 @@
 <h5 id="第五步-进入tomcat-webapps中将拷入的war删除-以免重新编译-在解压后的文件中-添加-solr需要-jar包到指定文件夹"><a href="#第五步-进入tomcat-webapps中将拷入的war删除-以免重新编译-在解压后的文件中-添加-solr需要-jar包到指定文件夹" class="headerlink" title="第五步 进入tomcat  webapps中将拷入的war删除,以免重新编译,在解压后的文件中 添加 solr需要 jar包到指定文件夹"></a>第五步 进入tomcat  webapps中将拷入的war删除,以免重新编译,在解压后的文件中 添加 solr需要 jar包到指定文件夹</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cp /usr/local/solr/solr-4.10.3/example/lib/ext/* </span><br><span class="line">solr/WEB-INF/lib/</span><br></pre></td></tr></table></figure>
 <h5 id="第六步-将-usr-local-solr-solr-4-10-3-example中的solr文件夹复制出来命名为solrhome"><a href="#第六步-将-usr-local-solr-solr-4-10-3-example中的solr文件夹复制出来命名为solrhome" class="headerlink" title="第六步 将/usr/local/solr/solr-4.10.3/example中的solr文件夹复制出来命名为solrhome"></a>第六步 将/usr/local/solr/solr-4.10.3/example中的solr文件夹复制出来命名为solrhome</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp -r solr-4.10.3/example/solr /usr/local/solr</span><br></pre></td></tr></table></figure>
 <h5 id="第七步-修改vim-tomcat-webapps-solr-WEB-INF-web-xml"><a href="#第七步-修改vim-tomcat-webapps-solr-WEB-INF-web-xml" class="headerlink" title="第七步 修改vim tomcat/webapps/solr/WEB-INF/web.xml"></a>第七步 修改vim tomcat/webapps/solr/WEB-INF/web.xml<img src="C:\Users\ADMINI~1\AppData\Local\Temp\1531653065347.png" alt="下的配置文件"></h5><p>最后访问<a href="http://192.168.200.128:8080/solr/" target="_blank" rel="noopener">http://192.168.200.128:8080/solr/</a> 看是否能访问成功</p>
-
-      
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2018/07/20/hello-world/" class="article-date">
-      <time datetime="2018-07-20T07:39:26.485Z" itemprop="datePublished">2018-07-20</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/07/20/hello-world/">Hello World</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
 
       
       
