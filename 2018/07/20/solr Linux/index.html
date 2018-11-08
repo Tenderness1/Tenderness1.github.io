@@ -12,13 +12,13 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="solr Linux安装过程 第一步 进入 cd  /usr/local/ 目录下 创建solr 目录1mkdir solr 第二步 在该目录下准备所需的三个压缩包并解压,注意其中有一个压缩包是以.zip结尾的,需要在linux中下载该指令12yum -y install unzipunzip IKAnalyzer2012FF_hf1.zip -d ./  第三步 将solr 中的war包 部署到">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="c:/Users/ADMINI~1/AppData/Local/Temp/1531642165781.png">
-<meta property="og:image" content="c:/Users/ADMINI~1/AppData/Local/Temp/1531653065347.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/20/solr%20Linux/C:/Users/ADMINI~1/AppData/Local/Temp/1531642165781.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/20/solr%20Linux/C:/Users/ADMINI~1/AppData/Local/Temp/1531653065347.png">
 <meta property="og:updated_time" content="2018-07-15T11:16:41.945Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hexo">
 <meta name="twitter:description" content="solr Linux安装过程 第一步 进入 cd  /usr/local/ 目录下 创建solr 目录1mkdir solr 第二步 在该目录下准备所需的三个压缩包并解压,注意其中有一个压缩包是以.zip结尾的,需要在linux中下载该指令12yum -y install unzipunzip IKAnalyzer2012FF_hf1.zip -d ./  第三步 将solr 中的war包 部署到">
-<meta name="twitter:image" content="c:/Users/ADMINI~1/AppData/Local/Temp/1531642165781.png">
+<meta name="twitter:image" content="http://yoursite.com/2018/07/20/solr%20Linux/C:/Users/ADMINI~1/AppData/Local/Temp/1531642165781.png">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -251,11 +251,11 @@
         <h3 id="solr-Linux安装过程"><a href="#solr-Linux安装过程" class="headerlink" title="solr Linux安装过程"></a>solr Linux安装过程</h3><hr>
 <h5 id="第一步-进入-cd-usr-local-目录下-创建solr-目录"><a href="#第一步-进入-cd-usr-local-目录下-创建solr-目录" class="headerlink" title="第一步 进入 cd  /usr/local/ 目录下 创建solr 目录"></a>第一步 进入 cd  /usr/local/ 目录下 创建solr 目录</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir solr</span><br></pre></td></tr></table></figure>
 <h5 id="第二步-在该目录下准备所需的三个压缩包并解压-注意其中有一个压缩包是以-zip结尾的-需要在linux中下载该指令"><a href="#第二步-在该目录下准备所需的三个压缩包并解压-注意其中有一个压缩包是以-zip结尾的-需要在linux中下载该指令" class="headerlink" title="第二步 在该目录下准备所需的三个压缩包并解压,注意其中有一个压缩包是以.zip结尾的,需要在linux中下载该指令"></a>第二步 在该目录下准备所需的三个压缩包并解压,注意其中有一个压缩包是以.zip结尾的,需要在linux中下载该指令</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum -y install unzip</span><br><span class="line">unzip IKAnalyzer2012FF_hf1.zip -d ./</span><br></pre></td></tr></table></figure>
-<p><img src="C:\Users\ADMINI~1\AppData\Local\Temp\1531642165781.png" alt=""></p>
+<p><img src="/2018/07/20/solr Linux/C:/Users\ADMINI~1\AppData\Local\Temp\1531642165781.png" alt=""></p>
 <h5 id="第三步-将solr-中的war包-部署到tomcat中-并再次打开一个窗口看tomcat的日志"><a href="#第三步-将solr-中的war包-部署到tomcat中-并再次打开一个窗口看tomcat的日志" class="headerlink" title="第三步 将solr 中的war包 部署到tomcat中,并再次打开一个窗口看tomcat的日志"></a>第三步 将solr 中的war包 部署到tomcat中,并再次打开一个窗口看tomcat的日志</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cp solr-4.10.3/example/webapps/solr.war  tomcat/webapps/</span><br><span class="line">/*看日志命令*/</span><br><span class="line"> tail -f /usr/local/solr/tomcat/logs/catalina.out</span><br></pre></td></tr></table></figure>
 <h5 id="第五步-进入tomcat-webapps中将拷入的war删除-以免重新编译-在解压后的文件中-添加-solr需要-jar包到指定文件夹"><a href="#第五步-进入tomcat-webapps中将拷入的war删除-以免重新编译-在解压后的文件中-添加-solr需要-jar包到指定文件夹" class="headerlink" title="第五步 进入tomcat  webapps中将拷入的war删除,以免重新编译,在解压后的文件中 添加 solr需要 jar包到指定文件夹"></a>第五步 进入tomcat  webapps中将拷入的war删除,以免重新编译,在解压后的文件中 添加 solr需要 jar包到指定文件夹</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cp /usr/local/solr/solr-4.10.3/example/lib/ext/* </span><br><span class="line">solr/WEB-INF/lib/</span><br></pre></td></tr></table></figure>
 <h5 id="第六步-将-usr-local-solr-solr-4-10-3-example中的solr文件夹复制出来命名为solrhome"><a href="#第六步-将-usr-local-solr-solr-4-10-3-example中的solr文件夹复制出来命名为solrhome" class="headerlink" title="第六步 将/usr/local/solr/solr-4.10.3/example中的solr文件夹复制出来命名为solrhome"></a>第六步 将/usr/local/solr/solr-4.10.3/example中的solr文件夹复制出来命名为solrhome</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp -r solr-4.10.3/example/solr /usr/local/solr</span><br></pre></td></tr></table></figure>
-<h5 id="第七步-修改vim-tomcat-webapps-solr-WEB-INF-web-xml"><a href="#第七步-修改vim-tomcat-webapps-solr-WEB-INF-web-xml" class="headerlink" title="第七步 修改vim tomcat/webapps/solr/WEB-INF/web.xml"></a>第七步 修改vim tomcat/webapps/solr/WEB-INF/web.xml<img src="C:\Users\ADMINI~1\AppData\Local\Temp\1531653065347.png" alt="下的配置文件"></h5><p>最后访问<a href="http://192.168.200.128:8080/solr/" target="_blank" rel="noopener">http://192.168.200.128:8080/solr/</a> 看是否能访问成功</p>
+<h5 id="第七步-修改vim-tomcat-webapps-solr-WEB-INF-web-xml"><a href="#第七步-修改vim-tomcat-webapps-solr-WEB-INF-web-xml" class="headerlink" title="第七步 修改vim tomcat/webapps/solr/WEB-INF/web.xml"></a>第七步 修改vim tomcat/webapps/solr/WEB-INF/web.xml<img src="/2018/07/20/solr Linux/C:/Users\ADMINI~1\AppData\Local\Temp\1531653065347.png" alt="下的配置文件"></h5><p>最后访问<a href="http://192.168.200.128:8080/solr/" target="_blank" rel="noopener">http://192.168.200.128:8080/solr/</a> 看是否能访问成功</p>
 
       
       
@@ -422,7 +422,7 @@
             <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
     </div>
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2018/09/26/Shadowsocks快速使用/">Shadowsocks快速使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/07/22/Zookeeper/">Zookeeper</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/07/22/Dubbo/">Dubbo</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/07/21/SpringSecurity安全框架/">SpringSecurity安全框架</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/07/20/solor中手动删除所有数据/">solor中手动删除所有数据</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/07/20/solr Linux/">solr Linux</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2018/11/08/JAVA内存区域有关问题详解/">JAVA内存区域有关问题详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/26/Shadowsocks快速使用/">Shadowsocks快速使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/07/22/Zookeeper/">Zookeeper</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/07/22/Dubbo/">Dubbo</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/07/21/SpringSecurity安全框架/">SpringSecurity安全框架</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/07/20/solor中手动删除所有数据/">solor中手动删除所有数据</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/07/20/solr Linux/">solr Linux</a></li></ul>
     <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
     <script>
         $(".post-list").addClass("toc-article");
