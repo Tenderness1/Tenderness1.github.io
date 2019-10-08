@@ -5,17 +5,17 @@
   
   <title>YouKnow</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Shadowsocks快速使用服务端的安装 Debian/Ubuntu  12apt-get install python-pippip install shadowsocks  CentOS 12yum install python-setuptools &amp;amp;&amp;amp; easy_install pippip install shadowsocks 之后创建配置文件/etc/shadows">
+  <meta name="description" content="现实企业级Java应用开发、维护中，有时候我们会碰到下面这些问题：   OutOfMemoryError，内存不足  内存泄露  线程死锁  锁争用（Lock Contention）  Java进程消耗CPU过高">
 <meta property="og:type" content="article">
 <meta property="og:title" content="YouKnow">
-<meta property="og:url" content="http://yoursite.com/2018/09/26/Shadowsocks快速使用/index.html">
+<meta property="og:url" content="http://yoursite.com/2019/10/08/JVM 性能调优监控工具 jps、jstack、jmap、jhat、jstat、hprof /index.html">
 <meta property="og:site_name" content="YouKnow">
-<meta property="og:description" content="Shadowsocks快速使用服务端的安装 Debian/Ubuntu  12apt-get install python-pippip install shadowsocks  CentOS 12yum install python-setuptools &amp;amp;&amp;amp; easy_install pippip install shadowsocks 之后创建配置文件/etc/shadows">
+<meta property="og:description" content="现实企业级Java应用开发、维护中，有时候我们会碰到下面这些问题：   OutOfMemoryError，内存不足  内存泄露  线程死锁  锁争用（Lock Contention）  Java进程消耗CPU过高">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-09-26T08:29:40.904Z">
+<meta property="og:updated_time" content="2019-10-08T03:24:44.649Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="YouKnow">
-<meta name="twitter:description" content="Shadowsocks快速使用服务端的安装 Debian/Ubuntu  12apt-get install python-pippip install shadowsocks  CentOS 12yum install python-setuptools &amp;amp;&amp;amp; easy_install pippip install shadowsocks 之后创建配置文件/etc/shadows">
+<meta name="twitter:description" content="现实企业级Java应用开发、维护中，有时候我们会碰到下面这些问题：   OutOfMemoryError，内存不足  内存泄露  线程死锁  锁争用（Lock Contention）  Java进程消耗CPU过高">
   
     <link rel="alternative" href="/atom.xml" title="YouKnow" type="application/atom+xml">
   
@@ -229,11 +229,11 @@
         </header>                
     </div>
 </nav>
-      <div class="body-wrap"><article id="post-Shadowsocks快速使用" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-JVM 性能调优监控工具 jps、jstack、jmap、jhat、jstat、hprof " class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2018/09/26/Shadowsocks快速使用/" class="article-date">
-      <time datetime="2018-09-26T08:29:40.794Z" itemprop="datePublished">2018-09-26</time>
+      <a href="/2019/10/08/JVM 性能调优监控工具 jps、jstack、jmap、jhat、jstat、hprof /" class="article-date">
+      <time datetime="2019-10-08T03:22:30.193Z" itemprop="datePublished">2019-10-08</time>
 </a>
     </div>
   
@@ -245,58 +245,15 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h1 id="Shadowsocks快速使用"><a href="#Shadowsocks快速使用" class="headerlink" title="Shadowsocks快速使用"></a>Shadowsocks快速使用</h1><h3 id="服务端的安装"><a href="#服务端的安装" class="headerlink" title="服务端的安装"></a>服务端的安装</h3><ul>
-<li>Debian/Ubuntu</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">apt-get install python-pip</span><br><span class="line">pip install shadowsocks</span><br></pre></td></tr></table></figure>
+        <p>现实企业级Java应用开发、维护中，有时候我们会碰到下面这些问题： </p>
 <ul>
-<li><p>CentOS</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum install python-setuptools &amp;&amp; easy_install pip</span><br><span class="line">pip install shadowsocks</span><br></pre></td></tr></table></figure>
-<p>之后创建配置文件<strong>/etc/shadowsocks.json</strong>  内容如下</p>
-<ol>
-<li>单用户配置</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"> &#123;</span><br><span class="line">    &quot;server&quot;:&quot;0.0.0.0&quot;,</span><br><span class="line">    &quot;server_port&quot;:38018,</span><br><span class="line">    &quot;local_address&quot;: &quot;127.0.0.1&quot;,</span><br><span class="line">    &quot;local_port&quot;:1080,</span><br><span class="line">    &quot;password&quot;:&quot;mypassword&quot;,</span><br><span class="line">    &quot;timeout&quot;:300,</span><br><span class="line">    &quot;method&quot;:&quot;rc4-md5&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>使用配置文件在后台运行</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssserver -c /etc/shadowsocks.json -d start</span><br></pre></td></tr></table></figure>
-<p>如果要停止运行,将命令中的start改成stop.</p>
-<p>2.多用户配置</p>
-<p>可以通过修改配置文件进行配置 通过添加端口号以及密码的方式</p>
-</li>
+<li>OutOfMemoryError，内存不足 </li>
+<li>内存泄露 </li>
+<li>线程死锁 </li>
+<li>锁争用（Lock Contention） </li>
+<li>Java进程消耗CPU过高 </li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&#123;  </span><br><span class="line"> &quot;server&quot;:&quot;0.0.0.0&quot;，  </span><br><span class="line"> &quot;local_address&quot;: &quot;127.0.0.1&quot;,  </span><br><span class="line"> &quot;local_port&quot;:1080,  </span><br><span class="line">  &quot;port_password&quot;: &#123;  </span><br><span class="line">     &quot;38011&quot;: &quot;passwd&quot;,  </span><br><span class="line">     &quot;38012&quot;: &quot;passwd&quot;,  </span><br><span class="line">     &quot;38013&quot;: &quot;passwd&quot;,  </span><br><span class="line">     &quot;38014&quot;: &quot;passwd&quot;  </span><br><span class="line"> &#125;,  </span><br><span class="line"> &quot;timeout&quot;:300,  </span><br><span class="line"> &quot;method&quot;:&quot;rc4-md5&quot;,  </span><br><span class="line"> &quot;fast_open&quot;: false  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>3,加速优化</p>
-<p>3.1内核参数优化</p>
-<p>首先,将Linux内核升级到3.5或以上.</p>
-<p>第一步,增加系统文件描叙符的最大限度</p>
-<p>编辑文件limits.conf</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/security/limits.conf</span><br></pre></td></tr></table></figure>
-<p>增加以下两行</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">*soft nofile 51200</span><br><span class="line">*hard nofile 51200</span><br></pre></td></tr></table></figure>
-<p>启动shadowsocks服务器之前,设置以下参数</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ulimit -n 51200</span><br></pre></td></tr></table></figure>
-<p>第二步,调整内核参数</p>
-<p>修改配置文件 /etc/sysctl.conf</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">fs.file-max = 51200</span><br><span class="line">net.core.rmem_max = 67108864</span><br><span class="line">net.core.wmem_max = 67108864</span><br><span class="line">net.core.netdev_max_backlog = 250000</span><br><span class="line">net.core.somaxconn = 4096</span><br><span class="line">net.ipv4.tcp_syncookies = 1</span><br><span class="line">net.ipv4.tcp_tw_reuse = 1</span><br><span class="line">net.ipv4.tcp_tw_recycle = 0</span><br><span class="line">net.ipv4.tcp_fin_timeout = 30</span><br><span class="line">net.ipv4.tcp_keepalive_time = 1200</span><br><span class="line">net.ipv4.ip_local_port_range = 10000 65000</span><br><span class="line">net.ipv4.tcp_max_syn_backlog = 8192</span><br><span class="line">net.ipv4.tcp_max_tw_buckets = 5000</span><br><span class="line">net.ipv4.tcp_fastopen = 3</span><br><span class="line">net.ipv4.tcp_rmem = 4096 87380 67108864</span><br><span class="line">net.ipv4.tcp_wmem = 4096 65536 67108864</span><br><span class="line">net.ipv4.tcp_mtu_probing = 1</span><br><span class="line">net.ipv4.tcp_congestion_control = hybla</span><br></pre></td></tr></table></figure>
-<p>修改后执行 sysctl -p 使配置生效</p>
-<p>3.2 锐速</p>
-<p>链接地址<a href="https://github.com/91yun/serverspeeder" target="_blank" rel="noopener">https://github.com/91yun/serverspeeder</a></p>
-<p>安装代码</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget -N --no-check-certificate https://github.com/91yun/serverspeeder/raw/master/serverspeeder.sh &amp;&amp; bash serverspeeder.sh</span><br></pre></td></tr></table></figure>
-<p>卸载方法</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chattr -i /serverspeeder/etc/apx* &amp;&amp; /serverspeeder/bin/serverSpeeder.sh uninstall -f</span><br></pre></td></tr></table></figure>
-<p>3.3net-speeder</p>
-<p>net-speeder原理非常简单粗暴,就是发包翻倍,这会占用大量的国际出口带宽,本质是损人利己,不建议使用</p>
-<p>(1)Ubuntu/Debian下安装依赖包</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">apt-get install libnet1</span><br><span class="line">apt-get install libpcap0.8</span><br><span class="line">apt-get install libnet1-dev</span><br><span class="line">apt-get install libpcap0.8-dev</span><br></pre></td></tr></table></figure>
-<p>(2)Centos下安装依赖包</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">需要配置 epel 第三方源。下载 epel ：http://dl.fedoraproject.org/pub/epe</span><br><span class="line"> l/ 。例如，Centos 7 x64：</span><br><span class="line"></span><br><span class="line">wget http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-5.no</span><br><span class="line">arch.rpm</span><br><span class="line">rpm -ivh epel-release-7-5.noarch.rpm</span><br><span class="line">yum repolist</span><br></pre></td></tr></table></figure>
-<p>然后安装依赖包</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install libnet libpcap libnet-devel libpcap-devel</span><br></pre></td></tr></table></figure>
-<p>(3)下载官方的tar.gz压缩包.解压安装运行</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">wget http://net-speeder.googlecode.com/files/net_speeder-v0.1.tar.gz </span><br><span class="line">tar zxvf net_speeder-v0.1.tar.gz</span><br><span class="line">cd net_speeder</span><br><span class="line">chmod 777 *</span><br><span class="line">sh build.sh -DCOOKED wget http://net-speeder.googlecode.com/files/net_speeder-v0.1.tar.gz </span><br><span class="line">tar zxvf net_speeder-v0.1.tar.gz</span><br><span class="line">cd net_speeder</span><br><span class="line">chmod 777 *</span><br><span class="line">sh build.sh -DCOOKED</span><br></pre></td></tr></table></figure>
-<p>首先你需要知道你的网卡设备名,可以使用ifconfig查看.假设是eth0,</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">那么运行方法是:</span><br><span class="line"></span><br><span class="line">./net_speeder eth0 &quot;ip&quot;</span><br><span class="line"></span><br><span class="line">关闭 net-speeder</span><br><span class="line"></span><br><span class="line">killall net_speeder</span><br></pre></td></tr></table></figure>
+
       
       
         <div class="page-reward">
@@ -351,13 +308,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2018/09/26/Shadowsocks快速使用/"></a></p>
+        <p><span>本文标题:</span><a href="/2019/10/08/JVM 性能调优监控工具 jps、jstack、jmap、jhat、jstat、hprof /"></a></p>
         <p><span>文章作者:</span><a href="/" title="访问 Fan Wenyan 的个人博客">Fan Wenyan</a></p>
-        <p><span>发布时间:</span>2018年09月26日 - 16时29分</p>
-        <p><span>最后更新:</span>2018年09月26日 - 16时29分</p>
+        <p><span>发布时间:</span>2019年10月08日 - 11时22分</p>
+        <p><span>最后更新:</span>2019年10月08日 - 11时24分</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2018/09/26/Shadowsocks快速使用/" title="">http://yoursite.com/2018/09/26/Shadowsocks快速使用/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2018/09/26/Shadowsocks快速使用/　　作者: Fan Wenyan" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2019/10/08/JVM 性能调优监控工具 jps、jstack、jmap、jhat、jstat、hprof /" title="">http://yoursite.com/2019/10/08/JVM 性能调优监控工具 jps、jstack、jmap、jhat、jstat、hprof /</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2019/10/08/JVM 性能调优监控工具 jps、jstack、jmap、jhat、jstat、hprof /　　作者: Fan Wenyan" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script src="/js/clipboard.min.js"></script>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
@@ -370,18 +327,9 @@
 
 <nav id="article-nav">
   
-    <a href="/2018/11/08/JAVA内存区域有关问题详解/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          JAVA内存区域有关问题详解
-        
-      </div>
-    </a>
   
-  
-    <a href="/2018/07/22/Zookeeper/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title"></div>
+    <a href="/2018/11/15/String类和常量池/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">String类和常量池</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -392,7 +340,7 @@
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Shadowsocks快速使用"><span class="toc-number">1.</span> <span class="toc-text">Shadowsocks快速使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#服务端的安装"><span class="toc-number">1.0.1.</span> <span class="toc-text">服务端的安装</span></a></li></ol></li></ol></li></ol>
+    
 </div>
 <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
 
@@ -458,13 +406,11 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2018/11/08/JAVA内存区域有关问题详解/" title="上一篇: JAVA内存区域有关问题详解">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
         
-            <a href="/2018/07/22/Zookeeper/" title="下一篇: ">
+            <a href="/2018/11/15/String类和常量池/" title="下一篇: String类和常量池">
                 <i class="fa fa-angle-right"></i>
             </a>
         

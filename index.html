@@ -230,6 +230,122 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-JVM 性能调优监控工具 jps、jstack、jmap、jhat、jstat、hprof " class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/10/08/JVM 性能调优监控工具 jps、jstack、jmap、jhat、jstat、hprof /" class="article-date">
+      <time datetime="2019-10-08T03:22:30.193Z" itemprop="datePublished">2019-10-08</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>现实企业级Java应用开发、维护中，有时候我们会碰到下面这些问题： </p>
+<ul>
+<li>OutOfMemoryError，内存不足 </li>
+<li>内存泄露 </li>
+<li>线程死锁 </li>
+<li>锁争用（Lock Contention） </li>
+<li>Java进程消耗CPU过高 </li>
+</ul>
+
+      
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-String类和常量池" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/11/15/String类和常量池/" class="article-date">
+      <time datetime="2018-11-15T03:13:48.000Z" itemprop="datePublished">2018-11-15</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/11/15/String类和常量池/">String类和常量池</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h3 id="String类和常量池"><a href="#String类和常量池" class="headerlink" title="String类和常量池"></a>String类和常量池</h3><h5 id="1-String对象的两种创建方式"><a href="#1-String对象的两种创建方式" class="headerlink" title="1 String对象的两种创建方式:"></a>1 String对象的两种创建方式:</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">String str1=&quot;abcd&quot;;</span><br><span class="line">String str2=new String(&quot;abcd&quot;);</span><br><span class="line">System.out.println(str1==str2); //false</span><br></pre></td></tr></table></figure>
+<p>这两种不同的创建方法是有差别的,第一种方式是在常量池中拿对象,第二种方式是直接在堆内存空间创建一个新的对象.</p>
+<p><img src="/2018/11/15/String类和常量池/./String类和常量池/68747470733a2f2f757365722d676f6c642d63646e2e786974752e696f2f323031382f382f32322f313635363165353961353963303837333f773d36393826683d33353526663d706e6726733d3130343439.jpg" alt=""></p>
+<h5 id="2-String类型的常量池比较特殊-它的主要使用方法有两种"><a href="#2-String类型的常量池比较特殊-它的主要使用方法有两种" class="headerlink" title="2.String类型的常量池比较特殊.它的主要使用方法有两种:"></a>2.String类型的常量池比较特殊.它的主要使用方法有两种:</h5><ul>
+<li><p>直接使用双引号声明出来的String对象会直接存储在常量池中.</p>
+</li>
+<li><p>如果不是用双引号声明的String对象,可以使用String提供的intern方法.String.intern()是一个Native方法,它的作用是:如果运行时常量池中已经包含一个等于此String对象内容的字符串,则返回常量池中该字符串的引用;如果没有,则在常量池中创建与此String内容想同的字符串,则返回常量池中该字符串的引用;如果没有,则在常量池中创建与此String内容相同的字符串,并返回常量池中创建的字符串的引用.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">String s1=<span class="keyword">new</span> String(<span class="string">"阿彦"</span>);</span><br><span class="line">String s2=s1.intern();</span><br><span class="line">String s3=<span class="string">"阿彦"</span>;</span><br><span class="line">System.out.println(s2);<span class="comment">//阿彦</span></span><br><span class="line">System.out.println(s1==s2);<span class="comment">//false,因为一个是堆内存中的String对象一个是常量池中的String对象</span></span><br><span class="line">System.out.println(s3==s2);<span class="comment">//true,因为两个都是常量池中的String对象</span></span><br></pre></td></tr></table></figure>
+<h5 id="3-String字符串拼接"><a href="#3-String字符串拼接" class="headerlink" title="3.String字符串拼接"></a>3.String字符串拼接</h5></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">String str1=&quot;str&quot;;</span><br><span class="line">String str2=&quot;ing&quot;;</span><br><span class="line"></span><br><span class="line">String str3 =&quot;str&quot;+&quot;ing&quot;;//常量池中的对象</span><br><span class="line">String str4 =str1 + str2;//在堆上创建的新的对象</span><br><span class="line">String str5 =&quot;string&quot;; //常量池中的对象</span><br><span class="line">System.out.println(str3==str4); //false</span><br><span class="line">System.out.println(str3==str5); //true</span><br><span class="line">System.out.println(str4==str5); //false</span><br></pre></td></tr></table></figure>
+
+      
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-JAVA内存区域有关问题详解" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -748,7 +864,7 @@
     <div class="outer">
         <div id="footer-info">
             <div class="footer-left">
-                &copy; 2018 Fan Wenyan
+                &copy; 2019 Fan Wenyan
             </div>
             <div class="footer-right">
                 <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/luuman/hexo-theme-spfk" target="_blank">spfk</a> by luuman
