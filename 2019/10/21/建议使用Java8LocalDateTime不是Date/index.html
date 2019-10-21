@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>YouKnow</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="建议使用Java8LocalDateTime不是Date阿里巴巴开发手册中禁用static修饰SimpleDateFormat 主要理解  为什么需要LocalDate、LocalTime、LocalDateTime【java8新提供的类】  java8新的时间API的使用方式，包括创建、格式化、解析、计算、修改 原因  为什么需要LocalDate、LocalTime、LocalDateTime">
+<meta property="og:type" content="article">
+<meta property="og:title" content="YouKnow">
+<meta property="og:url" content="http://yoursite.com/2019/10/21/建议使用Java8LocalDateTime不是Date/index.html">
+<meta property="og:site_name" content="YouKnow">
+<meta property="og:description" content="建议使用Java8LocalDateTime不是Date阿里巴巴开发手册中禁用static修饰SimpleDateFormat 主要理解  为什么需要LocalDate、LocalTime、LocalDateTime【java8新提供的类】  java8新的时间API的使用方式，包括创建、格式化、解析、计算、修改 原因  为什么需要LocalDate、LocalTime、LocalDateTime">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-10-21T01:36:28.283Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="YouKnow">
+<meta name="twitter:description" content="建议使用Java8LocalDateTime不是Date阿里巴巴开发手册中禁用static修饰SimpleDateFormat 主要理解  为什么需要LocalDate、LocalTime、LocalDateTime【java8新提供的类】  java8新的时间API的使用方式，包括创建、格式化、解析、计算、修改 原因  为什么需要LocalDate、LocalTime、LocalDateTime">
+  
+    <link rel="alternative" href="/atom.xml" title="YouKnow" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/favicon.png">
+  
+  
+      <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+      <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  
+  <!-- 加载特效 -->
+    <script src="/js/pace.js"></script>
+    <link href="/css/pace/pace-theme-flash.css" rel="stylesheet" />
+  <script>
+      var yiliaConfig = {
+          rootUrl: '/',
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false
+      }
+  </script>
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            
+            <img lazy-src="/img/head.jpg" class="js-avatar">
+            
+        </a>
+
+        <hgroup>
+          <h1 class="header-author"><a href="/" title="Hi Mate">Fan Wenyan</a></h1>
+        </hgroup>
+
+        
+        
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/Home">博客首页</a></li>
+                        
+                            <li><a href="/works">作品展示</a></li>
+                        
+                            <li><a href="/about">留言打卡</a></li>
+                        
+                            <li><a href="/FrontEndGuide">前端导航</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fl mail" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=PAkNDgsKBQ4MCnxNTRJfU1E" title="mail">mail</a>
+                            
+                                <a class="fl github" target="_blank" href="https://github.com/Tenderness1" title="github">github</a>
+                            
+                                <a class="fl zhihu" target="_blank" href="#" title="zhihu">zhihu</a>
+                            
+                                <a class="fl weibo" target="_blank" href="#" title="weibo">weibo</a>
+                            
+                                <a class="fl google" target="_blank" href="#" title="google">google</a>
+                            
+                                <a class="fl twitter" target="_blank" href="#" title="twitter">twitter</a>
+                            
+                                <a class="fl linkedin" target="_blank" href="#" title="linkedin">linkedin</a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="https://github.com/Tenderness1">name</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">纯海迷、爱运动、爱交友、爱旅行、喜欢接触新鲜事物、迎接新的挑战，更爱游离于错综复杂的编码与逻辑中</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="Me">Fan Wenyan</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                
+                    <img lazy-src="/img/head.jpg" class="js-avatar">
+                
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="Me">Fan Wenyan</a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/Home">博客首页</a></li>
+                
+                    <li><a href="/works">作品展示</a></li>
+                
+                    <li><a href="/about">留言打卡</a></li>
+                
+                    <li><a href="/FrontEndGuide">前端导航</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a class="mail" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=PAkNDgsKBQ4MCnxNTRJfU1E" title="mail">mail</a>
+                    
+                        <a class="github" target="_blank" href="https://github.com/Tenderness1" title="github">github</a>
+                    
+                        <a class="zhihu" target="_blank" href="#" title="zhihu">zhihu</a>
+                    
+                        <a class="weibo" target="_blank" href="#" title="weibo">weibo</a>
+                    
+                        <a class="google" target="_blank" href="#" title="google">google</a>
+                    
+                        <a class="twitter" target="_blank" href="#" title="twitter">twitter</a>
+                    
+                        <a class="linkedin" target="_blank" href="#" title="linkedin">linkedin</a>
+                    
+                </div>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-建议使用Java8LocalDateTime不是Date" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/10/21/建议使用Java8LocalDateTime不是Date/" class="article-date">
+      <time datetime="2019-10-21T01:36:28.072Z" itemprop="datePublished">2019-10-21</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h1 id="建议使用Java8LocalDateTime不是Date"><a href="#建议使用Java8LocalDateTime不是Date" class="headerlink" title="建议使用Java8LocalDateTime不是Date"></a>建议使用Java8LocalDateTime不是Date</h1><p>阿里巴巴开发手册中禁用static修饰SimpleDateFormat</p>
+<p>主要理解</p>
+<ul>
+<li><p>为什么需要<code>LocalDate</code>、<code>LocalTime</code>、<code>LocalDateTime</code>【java8新提供的类】</p>
+</li>
+<li><p><code>java8</code>新的时间<code>API</code>的使用方式，包括创建、格式化、解析、计算、修改</p>
+<h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h2></li>
+</ul>
+<p>为什么需要LocalDate、LocalTime、LocalDateTime</p>
+<p><code>Date</code>如果不格式化，打印出的日期可读性差 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Tue Sep 10 09:34:04 CST 2019</span><br></pre></td></tr></table></figure>
+<p>使用<code>SimpleDateFormat</code>对时间进行格式化，但<code>SimpleDateFormat</code>是线程不安全的<code>SimpleDateFormat</code>的<code>format</code>方法最终调用代码： </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">private StringBuffer format(Date date, StringBuffer toAppendTo,</span><br><span class="line">                              FieldDelegate delegate) &#123;</span><br><span class="line">        // Convert input date to time field list</span><br><span class="line">        calendar.setTime(date);</span><br><span class="line"></span><br><span class="line">        boolean useDateFormatSymbols = useDateFormatSymbols();</span><br><span class="line"></span><br><span class="line">        for (int i = 0; i &lt; compiledPattern.length; ) &#123;</span><br><span class="line">            int tag = compiledPattern[i] &gt;&gt;&gt; 8;</span><br><span class="line">            int count = compiledPattern[i++] &amp; 0xff;</span><br><span class="line">            if (count == 255) &#123;</span><br><span class="line">                count = compiledPattern[i++] &lt;&lt; 16;</span><br><span class="line">                count |= compiledPattern[i++];</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            switch (tag) &#123;</span><br><span class="line">            case TAG_QUOTE_ASCII_CHAR:</span><br><span class="line">                toAppendTo.append((char)count);</span><br><span class="line">                break;</span><br><span class="line"></span><br><span class="line">            case TAG_QUOTE_CHARS:</span><br><span class="line">                toAppendTo.append(compiledPattern, i, count);</span><br><span class="line">                i += count;</span><br><span class="line">                break;</span><br><span class="line"></span><br><span class="line">            default:</span><br><span class="line">                subFormat(tag, count, delegate, toAppendTo, useDateFormatSymbols);</span><br><span class="line">                break;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return toAppendTo;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p><code>calendar</code>是共享变量，并且这个共享变量没有做线程安全控制。当多个线程同时使用<strong>相同的SimpleDateFormat对象</strong>【如用<code>static</code>修饰的<code>SimpleDateFormat</code>】调用<code>format</code>方法时，多个线程会同时调用<code>calendar.setTime</code>方法，可能一个线程刚设置好<code>time</code>值另外的一个线程马上把设置的<code>time</code>值给修改了导致返回的格式化时间可能是错误的。在多并发情况下使用<code>SimpleDateFormat</code>需格外注意 <code>SimpleDateFormat</code>除了<code>format</code>是线程不安全以外，<code>parse</code>方法也是线程不安全的。<code>parse</code>方法实际调用<code>alb.establish(calendar).getTime()</code>方法来解析，<code>alb.establish(calendar)</code>方法里主要完成了</p>
+<ul>
+<li><ol>
+<li>重置日期对象cal的属性值</li>
+</ol>
+</li>
+<li><ol>
+<li>使用calb中中属性设置cal</li>
+</ol>
+</li>
+<li><ol>
+<li>返回设置好的cal对象</li>
+</ol>
+<p>但是这三步不是原子操作</p>
+</li>
+</ul>
+<p>多线程并发如何保证线程安全 - 避免线程之间共享一个<code>SimpleDateFormat</code>对象，每个线程使用时都创建一次<code>SimpleDateFormat</code>对象 =&gt; 创建和销毁对象的开销大 - 对使用<code>format</code>和<code>parse</code>方法的地方进行加锁 =&gt; 线程阻塞性能差 - 使用<code>ThreadLocal</code>保证每个线程最多只创建一次<code>SimpleDateFormat</code>对象 =&gt; 较好的方法</p>
+<ul>
+<li><p><code>Date</code>对时间处理比较麻烦，比如想获取某年、某月、某星期，以及<code>n</code>天以后的时间，如果用<code>Date</code>来处理的话真是太难了，你可能会说<code>Date</code>类不是有<code>getYear</code>、<code>getMonth</code>这些方法吗，获取年月日很<code>Easy</code>，但都被弃用了啊</p>
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p>使用java8全新的日期和时间API</p>
+</li>
+</ul>
+<h4 id="LocalDate"><a href="#LocalDate" class="headerlink" title="LocalDate"></a>LocalDate</h4><p> 只会获取年月日 </p>
+<ul>
+<li>创建<code>LocalDate</code> </li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//获取当前年月日</span><br><span class="line">LocalDate localDate = LocalDate.now();</span><br><span class="line">//构造指定的年月日</span><br><span class="line">LocalDate localDate1 = LocalDate.of(2019, 9, 10);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>获取年、月、日、星期几 </li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">int year = localDate.getYear();</span><br><span class="line">int year1 = localDate.get(ChronoField.YEAR);</span><br><span class="line">Month month = localDate.getMonth();</span><br><span class="line">int month1 = localDate.get(ChronoField.MONTH_OF_YEAR);</span><br><span class="line">int day = localDate.getDayOfMonth();</span><br><span class="line">int day1 = localDate.get(ChronoField.DAY_OF_MONTH);</span><br><span class="line">DayOfWeek dayOfWeek = localDate.getDayOfWeek();</span><br><span class="line">int dayOfWeek1 = localDate.get(ChronoField.DAY_OF_WEEK);</span><br></pre></td></tr></table></figure>
+<h4 id="LocalTime"><a href="#LocalTime" class="headerlink" title="LocalTime"></a>LocalTime</h4><p>只会获取几点几分几秒 </p>
+<ul>
+<li>创建<code>LocalTime</code> </li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">LocalTime localTime = LocalTime.of(13, 51, 10);</span><br><span class="line">LocalTime localTime1 = LocalTime.now();</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>获取时分秒 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">//获取小时</span><br><span class="line">int hour = localTime.getHour();</span><br><span class="line">int hour1 = localTime.get(ChronoField.HOUR_OF_DAY);</span><br><span class="line">//获取分</span><br><span class="line">int minute = localTime.getMinute();</span><br><span class="line">int minute1 = localTime.get(ChronoField.MINUTE_OF_HOUR);</span><br><span class="line">//获取秒</span><br><span class="line">int second = localTime.getSecond();</span><br><span class="line">int second1 = localTime.get(ChronoField.SECOND_OF_MINUTE);</span><br></pre></td></tr></table></figure>
+<h4 id="LocalDateTime"><a href="#LocalDateTime" class="headerlink" title="LocalDateTime"></a>LocalDateTime</h4></li>
+<li><p>创建<code>LocalDateTime</code> </p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">LocalDateTime localDateTime = LocalDateTime.now();</span><br><span class="line">LocalDateTime localDateTime1 = LocalDateTime.of(2019, Month.SEPTEMBER, 10, 14, 46, 56);</span><br><span class="line">LocalDateTime localDateTime2 = LocalDateTime.of(localDate, localTime);</span><br><span class="line">LocalDateTime localDateTime3 = localDate.atTime(localTime);</span><br><span class="line">LocalDateTime localDateTime4 = localTime.atDate(localDate);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>获取<code>LocalDate</code> </li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">LocalDate localDate2 = localDateTime.toLocalDate();</span><br></pre></td></tr></table></figure>
+<ul>
+<li>获取<code>LocalTime</code> </li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">LocalTime localTime2 = localDateTime.toLocalTime();</span><br></pre></td></tr></table></figure>
+<h4 id="Instant"><a href="#Instant" class="headerlink" title="Instant"></a>Instant</h4><p>获取秒数 </p>
+<ul>
+<li>创建<code>Instant</code>对象 </li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Instant instant = Instant.now();</span><br></pre></td></tr></table></figure>
+<ul>
+<li>获取秒数 </li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">long currentSecond = instant.getEpochSecond();</span><br></pre></td></tr></table></figure>
+<ul>
+<li>获取毫秒数 </li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">long currentMilli = instant.toEpochMilli();</span><br></pre></td></tr></table></figure>
+<p>个人觉得如果只是为了获取秒数或者毫秒数，使用<code>System.currentTimeMillis()</code>来得更为方便 </p>
+<h4 id="修改LocalDate、LocalTime、LocalDateTime、Instant"><a href="#修改LocalDate、LocalTime、LocalDateTime、Instant" class="headerlink" title="修改LocalDate、LocalTime、LocalDateTime、Instant"></a>修改LocalDate、LocalTime、LocalDateTime、Instant</h4><p><code>LocalDate</code>、<code>LocalTime</code>、<code>LocalDateTime</code>、<code>Instant</code>为<strong>不可变对象</strong>，修改这些对象对象会<strong>返回一个副本</strong> </p>
+<ul>
+<li>增加、减少年数、月数、天数等 以<code>LocalDateTime</code>为例 </li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">LocalDateTime localDateTime = LocalDateTime.of(2019, Month.SEPTEMBER, 10,</span><br><span class="line">              14, 46, 56);</span><br><span class="line">//增加一年</span><br><span class="line">localDateTime = localDateTime.plusYears(1);</span><br><span class="line">localDateTime = localDateTime.plus(1, ChronoUnit.YEARS);</span><br><span class="line">//减少一个月</span><br><span class="line">localDateTime = localDateTime.minusMonths(1);</span><br><span class="line">localDateTime = localDateTime.minus(1, ChronoUnit.MONTHS);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>通过<code>with</code>修改某些值 </li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//修改年为2019</span><br><span class="line">localDateTime = localDateTime.withYear(2020);</span><br><span class="line">//修改为2022</span><br><span class="line">localDateTime = localDateTime.with(ChronoField.YEAR, 2022);</span><br></pre></td></tr></table></figure>
+<p>还可以修改月、日 </p>
+<h4 id="时间计算"><a href="#时间计算" class="headerlink" title="时间计算"></a>时间计算</h4><p>比如有些时候想知道这个月的最后一天是几号、下个周末是几号，通过提供的时间和日期API可以很快得到答案 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">LocalDate localDate = LocalDate.now();</span><br><span class="line">LocalDate localDate1 = localDate.with(firstDayOfYear());</span><br></pre></td></tr></table></figure>
+<p>比如通过<code>firstDayOfYear()</code>返回了当前日期的第一天日期，还有很多方法这里不在举例说明 </p>
+<h5 id="格式化时间"><a href="#格式化时间" class="headerlink" title="格式化时间"></a>格式化时间</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">LocalDate localDate = LocalDate.of(2019, 9, 10);</span><br><span class="line">String s1 = localDate.format(DateTimeFormatter.BASIC_ISO_DATE);</span><br><span class="line">String s2 = localDate.format(DateTimeFormatter.ISO_LOCAL_DATE);</span><br><span class="line">//自定义格式化</span><br><span class="line">DateTimeFormatter dateTimeFormatter =   DateTimeFormatter.ofPattern(&quot;dd/MM/yyyy&quot;);</span><br><span class="line">String s3 = localDate.format(dateTimeFormatter);</span><br></pre></td></tr></table></figure>
+<p><code>DateTimeFormatter</code>默认提供了多种格式化方式，如果默认提供的不能满足要求，可以通过<code>DateTimeFormatter</code>的<code>ofPattern</code>方法创建自定义格式化方式 </p>
+<h5 id="解析时间"><a href="#解析时间" class="headerlink" title="解析时间"></a>解析时间</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">LocalDate localDate1 = LocalDate.parse(&quot;20190910&quot;, DateTimeFormatter.BASIC_ISO_DATE);</span><br><span class="line">LocalDate localDate2 = LocalDate.parse(&quot;2019-09-10&quot;, DateTimeFormatter.ISO_LOCAL_DATE);</span><br></pre></td></tr></table></figure>
+<p>和<code>SimpleDateFormat</code>相比，<code>DateTimeFormatter</code>是线程安全的 </p>
+<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p><code>LocalDateTime</code>：<code>Date</code>有的我都有，<code>Date</code>没有的我也有，日期选择请<code>Pick Me</code> </p>
+<p>SpringBoot中应用LocalDateTime </p>
+<ul>
+<li>将LocalDateTime字段以时间戳的方式返回给前端 添加日期转化类 </li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public class LocalDateTimeConverter extends JsonSerializer&lt;LocalDateTime&gt; &#123;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void serialize(LocalDateTime value, JsonGenerator gen, SerializerProvider serializers) throws IOException &#123;</span><br><span class="line">    gen.writeNumber(value.toInstant(ZoneOffset.of(&quot;+8&quot;)).toEpochMilli());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>并在<code>LocalDateTime</code>字段上添加<code>@JsonSerialize(using = LocalDateTimeConverter.class)</code>注解，如下： </li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@JsonSerialize(using = LocalDateTimeConverter.class)</span><br><span class="line">protected LocalDateTime gmtModified;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>将LocalDateTime字段以指定格式化日期的方式返回给前端 在<code>LocalDateTime</code>字段上添加<code>@JsonFormat(shape=JsonFormat.Shape.STRING, pattern=&quot;yyyy-MM-dd HH:mm:ss&quot;)</code>注解即可，如下：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@JsonFormat(shape=JsonFormat.Shape.STRING, pattern=&quot;yyyy-MM-dd HH:mm:ss&quot;)</span><br><span class="line">protected LocalDateTime gmtModified;</span><br></pre></td></tr></table></figure>
+<p> 对前端传入的日期进行格式化 在<code>LocalDateTime</code>字段上添加<code>@DateTimeFormat(pattern = &quot;yyyy-MM-dd HH:mm:ss&quot;)</code>注解即可，如下： </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@DateTimeFormat(pattern = &quot;yyyy-MM-dd HH:mm:ss&quot;)</span><br><span class="line">protected LocalDateTime gmtModified;</span><br></pre></td></tr></table></figure>
+
+      
+      
+        <div class="page-reward">
+          <p><a href="javascript:void(0)" onclick="dashangToggle()" class="dashang">赏</a></p>
+          <div class="hide_box"></div>
+          <div class="shang_box">
+            <a class="shang_close" href="javascript:void(0)" onclick="dashangToggle()">×</a>
+            <div class="shang_tit">
+              <p>纯属好玩</p>
+            </div>
+            <div class="shang_payimg">
+              <img src="/img/alipayimg.jpg" alt="扫码支持" title="扫一扫" />
+            </div>
+              <div class="pay_explain">扫码打赏，你说多少就多少</div>
+            <div class="shang_payselect">
+              
+                <div class="pay_item checked" data-id="alipay">
+                  <span class="radiobox"></span>
+                  <span class="pay_logo"><img src="/img/alipay.png" alt="支付宝" /></span>
+                </div>
+              
+              
+                <div class="pay_item" data-id="wechat">
+                  <span class="radiobox"></span>
+                  <span class="pay_logo"><img src="/img/weixin.png" alt="微信" /></span>
+                </div>
+              
+            </div>
+            <div class="shang_info">
+              <p>打开<span id="shang_pay_txt">支付宝</span>扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+        </div>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js"></script>
+        <script type="text/javascript">
+          $(".pay_item").click(function(){
+            $(this).addClass('checked').siblings('.pay_item').removeClass('checked');
+            var dataid=$(this).attr('data-id');
+            $(".shang_payimg img").attr("src","/img/"+dataid+"img.jpg");
+            $("#shang_pay_txt").text(dataid=="alipay"?"支付宝":"微信");
+          });
+          function dashangToggle(){
+            
+            $(".hide_box").fadeToggle();
+            $(".shang_box").fadeToggle();
+          }
+        </script>
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2019/10/21/建议使用Java8LocalDateTime不是Date/"></a></p>
+        <p><span>文章作者:</span><a href="/" title="访问 Fan Wenyan 的个人博客">Fan Wenyan</a></p>
+        <p><span>发布时间:</span>2019年10月21日 - 09时36分</p>
+        <p><span>最后更新:</span>2019年10月21日 - 09时36分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2019/10/21/建议使用Java8LocalDateTime不是Date/" title="">http://yoursite.com/2019/10/21/建议使用Java8LocalDateTime不是Date/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2019/10/21/建议使用Java8LocalDateTime不是Date/　　作者: Fan Wenyan" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script src="/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+<nav id="article-nav">
+  
+  
+    <a href="/2019/10/08/JVM 性能调优监控工具 jps、jstack、jmap、jhat、jstat、hprof/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title"></div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#建议使用Java8LocalDateTime不是Date"><span class="toc-number">1.</span> <span class="toc-text">建议使用Java8LocalDateTime不是Date</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#原因"><span class="toc-number">1.1.</span> <span class="toc-text">原因</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用"><span class="toc-number">1.2.</span> <span class="toc-text">使用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#LocalDate"><span class="toc-number">1.2.0.1.</span> <span class="toc-text">LocalDate</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#LocalTime"><span class="toc-number">1.2.0.2.</span> <span class="toc-text">LocalTime</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#LocalDateTime"><span class="toc-number">1.2.0.3.</span> <span class="toc-text">LocalDateTime</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Instant"><span class="toc-number">1.2.0.4.</span> <span class="toc-text">Instant</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#修改LocalDate、LocalTime、LocalDateTime、Instant"><span class="toc-number">1.2.0.5.</span> <span class="toc-text">修改LocalDate、LocalTime、LocalDateTime、Instant</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#时间计算"><span class="toc-number">1.2.0.6.</span> <span class="toc-text">时间计算</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#格式化时间"><span class="toc-number">1.2.0.6.1.</span> <span class="toc-text">格式化时间</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#解析时间"><span class="toc-number">1.2.0.6.2.</span> <span class="toc-text">解析时间</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#小结"><span class="toc-number">1.2.1.</span> <span class="toc-text">小结</span></a></li></ol></li></ol></li></ol>
+</div>
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+        }
+    })
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+    }
+</script>
+
+
+
+
+
+<div class="bdsharebuttonbox">
+	<a href="#" class="fx fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+	<a href="#" class="fx fa-weixin bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+	<a href="#" class="fx fa-qq bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+	<a href="#" class="fx fa-facebook-official bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+	<a href="#" class="fx fa-twitter bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+	<a href="#" class="fx fa-linkedin bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
+	<a href="#" class="fx fa-files-o bds_copy" data-cmd="copy" title="分享到复制网址"></a>
+</div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+
+
+    
+        <div id="gitments"></div>
+<script src="/js/gitment.browser.js"></script>
+<script>
+    var gitment = new Gitment({
+      id: window.location.pathname,
+      owner: 'fanwenyan',
+      repo: 'Tenderness1.github.io',
+      oauth: {
+        client_id: '',
+        client_secret: '',
+      },
+    })
+    gitment.render('gitments')
+</script>
+    
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+        
+            <a href="/2019/10/08/JVM 性能调优监控工具 jps、jstack、jmap、jhat、jstat、hprof/" title="下一篇: ">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2019/10/21/建议使用Java8LocalDateTime不是Date/">建议使用Java8LocalDateTime不是Date</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/08/JVM 性能调优监控工具 jps、jstack、jmap、jhat、jstat、hprof/">JVM 性能调优监控工具 jps、jstack、jmap、jhat、jstat、hprof</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/15/String类和常量池/">String类和常量池</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/08/JAVA内存区域有关问题详解/">JAVA内存区域有关问题详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/26/Shadowsocks快速使用/">Shadowsocks快速使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/07/22/Zookeeper/">Zookeeper</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/07/22/Dubbo/">Dubbo</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/07/21/SpringSecurity安全框架/">SpringSecurity安全框架</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/07/20/solor中手动删除所有数据/">solor中手动删除所有数据</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/07/20/solr Linux/">solr Linux</a></li></ul>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+    <script>
+        $(".post-list").addClass("toc-article");
+        $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+            }
+        })
+    </script>
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2019 Fan Wenyan
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/luuman/hexo-theme-spfk" target="_blank">spfk</a> by luuman
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" >到访数: 
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">本页阅读量: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+
+    </div>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var backgroundnum = 24;
+            var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+            $("#mobile-nav").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+            $(".left-col").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <script language="javascript">
+    $(function() {
+        $("a[title]").each(function() {
+            var a = $(this);
+            var title = a.attr('title');
+            if (title == undefined || title == "") return;
+            a.data('title', title).removeAttr('title').hover(
+
+            function() {
+                var offset = a.offset();
+                $("<div id=\"anchortitlecontainer\"></div>").appendTo($("body")).html(title).css({
+                    top: offset.top - a.outerHeight() - 15,
+                    left: offset.left + a.outerWidth()/2 + 1
+                }).fadeIn(function() {
+                    var pop = $(this);
+                    setTimeout(function() {
+                        pop.remove();
+                    }, pop.text().length * 800);
+                });
+            }, function() {
+                $("#anchortitlecontainer").remove();
+            });
+        });
+    });
+</script>
+
+
+  </div>
+</body>
+</html>

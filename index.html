@@ -230,6 +230,161 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-建议使用Java8LocalDateTime不是Date" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/10/21/建议使用Java8LocalDateTime不是Date/" class="article-date">
+      <time datetime="2019-10-21T01:36:28.072Z" itemprop="datePublished">2019-10-21</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h1 id="建议使用Java8LocalDateTime不是Date"><a href="#建议使用Java8LocalDateTime不是Date" class="headerlink" title="建议使用Java8LocalDateTime不是Date"></a>建议使用Java8LocalDateTime不是Date</h1><p>阿里巴巴开发手册中禁用static修饰SimpleDateFormat</p>
+<p>主要理解</p>
+<ul>
+<li><p>为什么需要<code>LocalDate</code>、<code>LocalTime</code>、<code>LocalDateTime</code>【java8新提供的类】</p>
+</li>
+<li><p><code>java8</code>新的时间<code>API</code>的使用方式，包括创建、格式化、解析、计算、修改</p>
+<h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h2></li>
+</ul>
+<p>为什么需要LocalDate、LocalTime、LocalDateTime</p>
+<p><code>Date</code>如果不格式化，打印出的日期可读性差 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Tue Sep 10 09:34:04 CST 2019</span><br></pre></td></tr></table></figure>
+<p>使用<code>SimpleDateFormat</code>对时间进行格式化，但<code>SimpleDateFormat</code>是线程不安全的<code>SimpleDateFormat</code>的<code>format</code>方法最终调用代码： </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">private StringBuffer format(Date date, StringBuffer toAppendTo,</span><br><span class="line">                              FieldDelegate delegate) &#123;</span><br><span class="line">        // Convert input date to time field list</span><br><span class="line">        calendar.setTime(date);</span><br><span class="line"></span><br><span class="line">        boolean useDateFormatSymbols = useDateFormatSymbols();</span><br><span class="line"></span><br><span class="line">        for (int i = 0; i &lt; compiledPattern.length; ) &#123;</span><br><span class="line">            int tag = compiledPattern[i] &gt;&gt;&gt; 8;</span><br><span class="line">            int count = compiledPattern[i++] &amp; 0xff;</span><br><span class="line">            if (count == 255) &#123;</span><br><span class="line">                count = compiledPattern[i++] &lt;&lt; 16;</span><br><span class="line">                count |= compiledPattern[i++];</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            switch (tag) &#123;</span><br><span class="line">            case TAG_QUOTE_ASCII_CHAR:</span><br><span class="line">                toAppendTo.append((char)count);</span><br><span class="line">                break;</span><br><span class="line"></span><br><span class="line">            case TAG_QUOTE_CHARS:</span><br><span class="line">                toAppendTo.append(compiledPattern, i, count);</span><br><span class="line">                i += count;</span><br><span class="line">                break;</span><br><span class="line"></span><br><span class="line">            default:</span><br><span class="line">                subFormat(tag, count, delegate, toAppendTo, useDateFormatSymbols);</span><br><span class="line">                break;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return toAppendTo;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p><code>calendar</code>是共享变量，并且这个共享变量没有做线程安全控制。当多个线程同时使用<strong>相同的SimpleDateFormat对象</strong>【如用<code>static</code>修饰的<code>SimpleDateFormat</code>】调用<code>format</code>方法时，多个线程会同时调用<code>calendar.setTime</code>方法，可能一个线程刚设置好<code>time</code>值另外的一个线程马上把设置的<code>time</code>值给修改了导致返回的格式化时间可能是错误的。在多并发情况下使用<code>SimpleDateFormat</code>需格外注意 <code>SimpleDateFormat</code>除了<code>format</code>是线程不安全以外，<code>parse</code>方法也是线程不安全的。<code>parse</code>方法实际调用<code>alb.establish(calendar).getTime()</code>方法来解析，<code>alb.establish(calendar)</code>方法里主要完成了</p>
+<ul>
+<li><ol>
+<li>重置日期对象cal的属性值</li>
+</ol>
+</li>
+<li><ol>
+<li>使用calb中中属性设置cal</li>
+</ol>
+</li>
+<li><ol>
+<li>返回设置好的cal对象</li>
+</ol>
+<p>但是这三步不是原子操作</p>
+</li>
+</ul>
+<p>多线程并发如何保证线程安全 - 避免线程之间共享一个<code>SimpleDateFormat</code>对象，每个线程使用时都创建一次<code>SimpleDateFormat</code>对象 =&gt; 创建和销毁对象的开销大 - 对使用<code>format</code>和<code>parse</code>方法的地方进行加锁 =&gt; 线程阻塞性能差 - 使用<code>ThreadLocal</code>保证每个线程最多只创建一次<code>SimpleDateFormat</code>对象 =&gt; 较好的方法</p>
+<ul>
+<li><p><code>Date</code>对时间处理比较麻烦，比如想获取某年、某月、某星期，以及<code>n</code>天以后的时间，如果用<code>Date</code>来处理的话真是太难了，你可能会说<code>Date</code>类不是有<code>getYear</code>、<code>getMonth</code>这些方法吗，获取年月日很<code>Easy</code>，但都被弃用了啊</p>
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p>使用java8全新的日期和时间API</p>
+</li>
+</ul>
+<h4 id="LocalDate"><a href="#LocalDate" class="headerlink" title="LocalDate"></a>LocalDate</h4><p> 只会获取年月日 </p>
+<ul>
+<li>创建<code>LocalDate</code> </li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//获取当前年月日</span><br><span class="line">LocalDate localDate = LocalDate.now();</span><br><span class="line">//构造指定的年月日</span><br><span class="line">LocalDate localDate1 = LocalDate.of(2019, 9, 10);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>获取年、月、日、星期几 </li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">int year = localDate.getYear();</span><br><span class="line">int year1 = localDate.get(ChronoField.YEAR);</span><br><span class="line">Month month = localDate.getMonth();</span><br><span class="line">int month1 = localDate.get(ChronoField.MONTH_OF_YEAR);</span><br><span class="line">int day = localDate.getDayOfMonth();</span><br><span class="line">int day1 = localDate.get(ChronoField.DAY_OF_MONTH);</span><br><span class="line">DayOfWeek dayOfWeek = localDate.getDayOfWeek();</span><br><span class="line">int dayOfWeek1 = localDate.get(ChronoField.DAY_OF_WEEK);</span><br></pre></td></tr></table></figure>
+<h4 id="LocalTime"><a href="#LocalTime" class="headerlink" title="LocalTime"></a>LocalTime</h4><p>只会获取几点几分几秒 </p>
+<ul>
+<li>创建<code>LocalTime</code> </li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">LocalTime localTime = LocalTime.of(13, 51, 10);</span><br><span class="line">LocalTime localTime1 = LocalTime.now();</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>获取时分秒 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">//获取小时</span><br><span class="line">int hour = localTime.getHour();</span><br><span class="line">int hour1 = localTime.get(ChronoField.HOUR_OF_DAY);</span><br><span class="line">//获取分</span><br><span class="line">int minute = localTime.getMinute();</span><br><span class="line">int minute1 = localTime.get(ChronoField.MINUTE_OF_HOUR);</span><br><span class="line">//获取秒</span><br><span class="line">int second = localTime.getSecond();</span><br><span class="line">int second1 = localTime.get(ChronoField.SECOND_OF_MINUTE);</span><br></pre></td></tr></table></figure>
+<h4 id="LocalDateTime"><a href="#LocalDateTime" class="headerlink" title="LocalDateTime"></a>LocalDateTime</h4></li>
+<li><p>创建<code>LocalDateTime</code> </p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">LocalDateTime localDateTime = LocalDateTime.now();</span><br><span class="line">LocalDateTime localDateTime1 = LocalDateTime.of(2019, Month.SEPTEMBER, 10, 14, 46, 56);</span><br><span class="line">LocalDateTime localDateTime2 = LocalDateTime.of(localDate, localTime);</span><br><span class="line">LocalDateTime localDateTime3 = localDate.atTime(localTime);</span><br><span class="line">LocalDateTime localDateTime4 = localTime.atDate(localDate);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>获取<code>LocalDate</code> </li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">LocalDate localDate2 = localDateTime.toLocalDate();</span><br></pre></td></tr></table></figure>
+<ul>
+<li>获取<code>LocalTime</code> </li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">LocalTime localTime2 = localDateTime.toLocalTime();</span><br></pre></td></tr></table></figure>
+<h4 id="Instant"><a href="#Instant" class="headerlink" title="Instant"></a>Instant</h4><p>获取秒数 </p>
+<ul>
+<li>创建<code>Instant</code>对象 </li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Instant instant = Instant.now();</span><br></pre></td></tr></table></figure>
+<ul>
+<li>获取秒数 </li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">long currentSecond = instant.getEpochSecond();</span><br></pre></td></tr></table></figure>
+<ul>
+<li>获取毫秒数 </li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">long currentMilli = instant.toEpochMilli();</span><br></pre></td></tr></table></figure>
+<p>个人觉得如果只是为了获取秒数或者毫秒数，使用<code>System.currentTimeMillis()</code>来得更为方便 </p>
+<h4 id="修改LocalDate、LocalTime、LocalDateTime、Instant"><a href="#修改LocalDate、LocalTime、LocalDateTime、Instant" class="headerlink" title="修改LocalDate、LocalTime、LocalDateTime、Instant"></a>修改LocalDate、LocalTime、LocalDateTime、Instant</h4><p><code>LocalDate</code>、<code>LocalTime</code>、<code>LocalDateTime</code>、<code>Instant</code>为<strong>不可变对象</strong>，修改这些对象对象会<strong>返回一个副本</strong> </p>
+<ul>
+<li>增加、减少年数、月数、天数等 以<code>LocalDateTime</code>为例 </li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">LocalDateTime localDateTime = LocalDateTime.of(2019, Month.SEPTEMBER, 10,</span><br><span class="line">              14, 46, 56);</span><br><span class="line">//增加一年</span><br><span class="line">localDateTime = localDateTime.plusYears(1);</span><br><span class="line">localDateTime = localDateTime.plus(1, ChronoUnit.YEARS);</span><br><span class="line">//减少一个月</span><br><span class="line">localDateTime = localDateTime.minusMonths(1);</span><br><span class="line">localDateTime = localDateTime.minus(1, ChronoUnit.MONTHS);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>通过<code>with</code>修改某些值 </li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//修改年为2019</span><br><span class="line">localDateTime = localDateTime.withYear(2020);</span><br><span class="line">//修改为2022</span><br><span class="line">localDateTime = localDateTime.with(ChronoField.YEAR, 2022);</span><br></pre></td></tr></table></figure>
+<p>还可以修改月、日 </p>
+<h4 id="时间计算"><a href="#时间计算" class="headerlink" title="时间计算"></a>时间计算</h4><p>比如有些时候想知道这个月的最后一天是几号、下个周末是几号，通过提供的时间和日期API可以很快得到答案 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">LocalDate localDate = LocalDate.now();</span><br><span class="line">LocalDate localDate1 = localDate.with(firstDayOfYear());</span><br></pre></td></tr></table></figure>
+<p>比如通过<code>firstDayOfYear()</code>返回了当前日期的第一天日期，还有很多方法这里不在举例说明 </p>
+<h5 id="格式化时间"><a href="#格式化时间" class="headerlink" title="格式化时间"></a>格式化时间</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">LocalDate localDate = LocalDate.of(2019, 9, 10);</span><br><span class="line">String s1 = localDate.format(DateTimeFormatter.BASIC_ISO_DATE);</span><br><span class="line">String s2 = localDate.format(DateTimeFormatter.ISO_LOCAL_DATE);</span><br><span class="line">//自定义格式化</span><br><span class="line">DateTimeFormatter dateTimeFormatter =   DateTimeFormatter.ofPattern(&quot;dd/MM/yyyy&quot;);</span><br><span class="line">String s3 = localDate.format(dateTimeFormatter);</span><br></pre></td></tr></table></figure>
+<p><code>DateTimeFormatter</code>默认提供了多种格式化方式，如果默认提供的不能满足要求，可以通过<code>DateTimeFormatter</code>的<code>ofPattern</code>方法创建自定义格式化方式 </p>
+<h5 id="解析时间"><a href="#解析时间" class="headerlink" title="解析时间"></a>解析时间</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">LocalDate localDate1 = LocalDate.parse(&quot;20190910&quot;, DateTimeFormatter.BASIC_ISO_DATE);</span><br><span class="line">LocalDate localDate2 = LocalDate.parse(&quot;2019-09-10&quot;, DateTimeFormatter.ISO_LOCAL_DATE);</span><br></pre></td></tr></table></figure>
+<p>和<code>SimpleDateFormat</code>相比，<code>DateTimeFormatter</code>是线程安全的 </p>
+<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p><code>LocalDateTime</code>：<code>Date</code>有的我都有，<code>Date</code>没有的我也有，日期选择请<code>Pick Me</code> </p>
+<p>SpringBoot中应用LocalDateTime </p>
+<ul>
+<li>将LocalDateTime字段以时间戳的方式返回给前端 添加日期转化类 </li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public class LocalDateTimeConverter extends JsonSerializer&lt;LocalDateTime&gt; &#123;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void serialize(LocalDateTime value, JsonGenerator gen, SerializerProvider serializers) throws IOException &#123;</span><br><span class="line">    gen.writeNumber(value.toInstant(ZoneOffset.of(&quot;+8&quot;)).toEpochMilli());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>并在<code>LocalDateTime</code>字段上添加<code>@JsonSerialize(using = LocalDateTimeConverter.class)</code>注解，如下： </li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@JsonSerialize(using = LocalDateTimeConverter.class)</span><br><span class="line">protected LocalDateTime gmtModified;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>将LocalDateTime字段以指定格式化日期的方式返回给前端 在<code>LocalDateTime</code>字段上添加<code>@JsonFormat(shape=JsonFormat.Shape.STRING, pattern=&quot;yyyy-MM-dd HH:mm:ss&quot;)</code>注解即可，如下：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@JsonFormat(shape=JsonFormat.Shape.STRING, pattern=&quot;yyyy-MM-dd HH:mm:ss&quot;)</span><br><span class="line">protected LocalDateTime gmtModified;</span><br></pre></td></tr></table></figure>
+<p> 对前端传入的日期进行格式化 在<code>LocalDateTime</code>字段上添加<code>@DateTimeFormat(pattern = &quot;yyyy-MM-dd HH:mm:ss&quot;)</code>注解即可，如下： </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@DateTimeFormat(pattern = &quot;yyyy-MM-dd HH:mm:ss&quot;)</span><br><span class="line">protected LocalDateTime gmtModified;</span><br></pre></td></tr></table></figure>
+
+      
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-JVM 性能调优监控工具 jps、jstack、jmap、jhat、jstat、hprof" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
